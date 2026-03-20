@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Khitanan - Raditya P. Pratama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --cream-dark: #ede6d6;
+    --ivory: #faf6ee;
+    --green-dark: #2d5a27;
+    --green-mid: #3d7a35;
+    --green-light: #5a9e50;
+    --maroon: #7a1e2e;
+    --maroon-light: #9e3040;
+    --gold: #c9a84c;
+    --gold-light: #e8cc80;
+    --brown-text: #5c4033;
+    --text-dark: #2c1810;
+    --white: #ffffff;
+    --shadow: rgba(44, 24, 16, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--cream);
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* ===================== ENVELOPE SCREEN ===================== */
+  #envelope-screen {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(145deg, #f0e8d6 0%, #e8dcc8 40%, #ddd0b8 100%);
+    z-index: 100;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  #envelope-screen.hide {
+    opacity: 0; transform: scale(1.1); pointer-events: none;
+  }
+
+  /* Sparkles */
+  .bg-sparkle {
+    position: absolute; pointer-events: none;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  .sparkle-tl { top: 5%; left: 5%; }
+  .sparkle-tr { top: 8%; right: 5%; animation-delay: 0.7s; }
+  .sparkle-bl { bottom: 12%; left: 3%; animation-delay: 1.4s; }
+  .sparkle-br { bottom: 8%; right: 4%; animation-delay: 2.1s; }
+  .sparkle-c1 { top: 25%; left: 8%; animation-delay: 0.5s; }
+  .sparkle-c2 { top: 60%; right: 8%; animation-delay: 1.8s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 0.7; transform: scale(1.2) rotate(30deg); }
+  }
+
+  /* Floral corners on envelope screen */
+  .env-screen-floral {
+    position: absolute; pointer-events: none; opacity: 0.5;
+  }
+  .esf-tl { top: 0; left: 0; width: clamp(150px,30vw,220px); }
+  .esf-br { bottom: 0; right: 0; width: clamp(150px,30vw,220px); transform: rotate(180deg); }
+  .esf-tr { top: 0; right: 0; width: clamp(100px,22vw,160px); transform: scaleX(-1); }
+  .esf-bl { bottom: 0; left: 0; width: clamp(100px,22vw,160px); transform: rotate(90deg) scaleX(-1); }
+
+  /* Envelope wrapper */
+  .envelope-wrapper {
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 36px;
+    z-index: 2;
+  }
+  .envelope-intro {
+    text-align: center;
+    animation: fadeInDown 1s ease both;
+  }
+  .envelope-intro .sub {
+    font-size: 0.78rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 6px; font-weight: 600;
+  }
+  .envelope-intro .ttl {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    color: var(--brown-text); font-style: italic; font-weight: 500;
+  }
+
+  /* The Envelope */
+  .envelope {
+    position: relative;
+    width: clamp(280px, 78vw, 420px);
+    cursor: pointer;
+    filter: drop-shadow(0 20px 60px rgba(44,24,16,0.3));
+    animation: floatEnv 3.5s ease-in-out infinite, fadeInUp 1s 0.3s ease both;
+    transition: transform 0.3s ease;
+  }
+  .envelope:hover { transform: scale(1.03) translateY(-6px); }
+  .envelope:active { transform: scale(0.97); }
+
+  @keyframes floatEnv {
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+  }
+
+  .env-body {
+    position: relative;
+    width: 100%; aspect-ratio: 1.6 / 1;
+    background: linear-gradient(160deg, #faf6ee 0%, #f0e8d6 60%, #e8dcc8 100%);
+    border-radius: 4px 4px 14px 14px;
+    border: 1px solid rgba(201,168,76,0.45);
+    overflow: visible;
+  }
+  /* V diagonal lines */
+  .env-body::before {
+    content:''; position:absolute; inset:0; border-radius:4px 4px 14px 14px;
+    background:
+      linear-gradient(135deg,transparent 49.5%,rgba(201,168,76,0.2) 49.5%,rgba(201,168,76,0.2) 50.5%,transparent 50.5%),
+      linear-gradient(225deg,transparent 49.5%,rgba(201,168,76,0.2) 49.5%,rgba(201,168,76,0.2) 50.5%,transparent 50.5%);
+  }
+  .env-flap {
+    position:absolute; top:0; left:0; right:0; height:52%;
+    background: linear-gradient(175deg,#f8f3ea 0%,#eddec0 100%);
+    clip-path: polygon(0 0,100% 0,50% 100%);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    z-index:2;
+  }
+
+  /* Floral on envelope */
+  .env-fl-tl {
+    position:absolute; top:-18px; left:-18px; width:130px;
+    pointer-events:none; opacity:0.72; z-index:3;
+  }
+  .env-fl-br {
+    position:absolute; bottom:-18px; right:-18px; width:108px;
+    pointer-events:none; opacity:0.72; z-index:3; transform:rotate(180deg);
+  }
+
+  /* Wax seal */
+  .wax-seal {
+    position:absolute; bottom:-28px; left:50%; transform:translateX(-50%);
+    width:76px; height:76px;
+    background: radial-gradient(circle at 38% 32%,#b02d40,#7a1e2e 55%,#551525);
+    border-radius:50%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    z-index:10;
+    box-shadow:0 6px 22px rgba(122,30,46,0.55),inset 0 2px 5px rgba(255,255,255,0.12);
+    border:2.5px solid rgba(201,168,76,0.55);
+    cursor:pointer;
+    animation:sealPulse 2s ease-in-out infinite;
+  }
+  @keyframes sealPulse {
+    0%,100%{box-shadow:0 6px 22px rgba(122,30,46,0.55),0 0 0 0 rgba(122,30,46,0.3);}
+    50%{box-shadow:0 6px 22px rgba(122,30,46,0.55),0 0 0 12px rgba(122,30,46,0);}
+  }
+  .wax-seal span {
+    font-family:'Cormorant Garamond',serif;
+    font-size:0.58rem; color:var(--gold-light); text-align:center;
+    line-height:1.35; font-weight:500;
+  }
+  .wax-star { font-size:1rem; color:var(--gold-light); margin-bottom:2px; }
+
+  .env-hint {
+    font-size:0.78rem; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--brown-text); opacity:0.65;
+    animation: fadeInUp 1s 0.8s ease both, hint 2.5s 1.5s ease-in-out infinite;
+  }
+  @keyframes hint { 0%,100%{opacity:0.65;} 50%{opacity:0.25;} }
+
+  /* Dot sparkles on envelope */
+  .dot-sp {
+    position:absolute; width:7px; height:7px;
+    background:var(--gold); border-radius:50%;
+    animation:spFloat 4s ease-in-out infinite;
+  }
+  @keyframes spFloat {
+    0%,100%{opacity:0;transform:translateY(0) scale(0);}
+    30%{opacity:1;transform:translateY(-22px) scale(1);}
+    70%{opacity:0.4;transform:translateY(-44px) scale(0.4);}
+  }
+
+  /* ===================== OPENING OVERLAY ===================== */
+  #opening-overlay {
+    position:fixed; inset:0;
+    background:var(--ivory);
+    z-index:90;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.4s ease;
+  }
+  #opening-overlay.active { opacity:1; pointer-events:all; }
+  .opening-env-wrap {
+    width:clamp(260px,65vw,360px);
+    animation:openAnim 1.8s ease forwards;
+  }
+  @keyframes openAnim {
+    0%{transform:scale(1) translateY(0) rotate(0);opacity:1;}
+    25%{transform:scale(1.06) translateY(-12px) rotate(0);opacity:1;}
+    60%{transform:scale(0.88) translateY(25px) rotate(4deg);opacity:0.7;}
+    100%{transform:scale(0.35) translateY(120px) rotate(12deg);opacity:0;}
+  }
+
+  /* ===================== MAIN INVITATION ===================== */
+  #main-invitation {
+    position:fixed; inset:0;
+    overflow-y:auto; overflow-x:hidden;
+    background:var(--cream);
+    opacity:0; transform:translateY(40px);
+    pointer-events:none;
+    transition:opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s;
+    scroll-behavior:smooth;
+    padding-bottom:110px;
+  }
+  #main-invitation.visible {
+    opacity:1; transform:translateY(0); pointer-events:all;
+  }
+  #main-invitation::-webkit-scrollbar{display:none;}
+
+  /* ---- HERO ---- */
+  .hero {
+    position:relative;
+    min-height:100svh;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:20px 24px 32px;
+    overflow:hidden;
+    background:linear-gradient(175deg,#faf6ee 0%,#f0e8d6 55%,#e8dcc8 100%);
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 18% 18%,rgba(201,168,76,0.08) 0%,transparent 50%),
+      radial-gradient(circle at 82% 82%,rgba(45,90,39,0.07) 0%,transparent 50%),
+      radial-gradient(circle at 82% 12%,rgba(122,30,46,0.05) 0%,transparent 40%);
+    pointer-events:none;
+  }
+
+  /* Hero florals */
+  .hfl { position:absolute; pointer-events:none; }
+  .hfl-tl { top:-8px; left:-8px; width:clamp(140px,35vw,220px); opacity:0.62; animation:sway 6s ease-in-out infinite; }
+  .hfl-br { bottom:-8px; right:-8px; width:clamp(130px,30vw,195px); opacity:0.62; transform:rotate(180deg); animation:sway 6s 1.5s ease-in-out infinite; }
+  .hfl-tr { top:-4px; right:-4px; width:clamp(96px,24vw,150px); opacity:0.42; transform:scaleX(-1); animation:sway 7s 0.8s ease-in-out infinite; }
+  .hfl-bl { bottom:-4px; left:-4px; width:clamp(88px,22vw,135px); opacity:0.42; transform:rotate(90deg) scaleX(-1); animation:sway 7s 2s ease-in-out infinite; }
+  @keyframes sway {
+    0%,100%{transform-origin:bottom;transform:rotate(0deg);}
+    25%{transform:rotate(1.5deg);}
+    75%{transform:rotate(-1deg);}
+  }
+  .hfl-br { animation:sway2 6s 1.5s ease-in-out infinite !important; }
+  @keyframes sway2 {
+    0%,100%{transform:rotate(180deg);}
+    25%{transform:rotate(181.5deg);}
+    75%{transform:rotate(179deg);}
+  }
+
+  /* Gold frame */
+  .geo-frame {
+    position:absolute; pointer-events:none; opacity:0.38;
+    width:88%; max-width:500px;
+    top:50%; left:50%; transform:translate(-50%,-50%);
+  }
+
+  /* Bismillah */
+  .bismillah {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(0.82rem,2.5vw,0.98rem);
+    color:var(--green-dark); letter-spacing:0.25em; text-align:center;
+    margin-bottom:14px; font-weight:500;
+    opacity:0; animation:revUp 0.8s 0.5s ease forwards;
+  }
+
+  /* Photo */
+  .photo-wrap {
+    position:relative; margin:18px 0;
+    opacity:0; animation:revScale 0.9s 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  .photo-ring {
+    position:absolute; inset:-20px;
+    border:1.5px solid var(--gold); border-radius:50%;
+    opacity:0.45; animation:spin 20s linear infinite;
+  }
+  .photo-ring::before {
+    content:''; position:absolute; inset:6px;
+    border:1px dashed rgba(201,168,76,0.3); border-radius:50%;
+  }
+  @keyframes spin { to{transform:rotate(360deg);} }
+
+  .photo-diamond {
+    position:absolute; inset:-32px;
+    border:1.5px solid rgba(201,168,76,0.3);
+    transform:rotate(45deg);
+  }
+  .photo-circle {
+    width:clamp(148px,38vw,198px); height:clamp(148px,38vw,198px);
+    border-radius:50%; overflow:hidden;
+    border:4px solid var(--gold);
+    box-shadow:0 8px 32px rgba(44,24,16,0.22), 0 0 0 8px rgba(201,168,76,0.14);
+    position:relative; z-index:1;
+  }
+  .photo-circle img {
+    width:100%; height:100%; object-fit:cover; object-position:center top;
+  }
+  /* Diamond corner dots */
+  .dd { position:absolute; width:8px; height:8px; background:var(--gold); transform:rotate(45deg); z-index:2; }
+  .dd-t { top:-32px; left:50%; transform:translateX(-50%) rotate(45deg); }
+  .dd-b { bottom:-32px; left:50%; transform:translateX(-50%) rotate(45deg); }
+  .dd-l { left:-32px; top:50%; transform:translateY(-50%) rotate(45deg); }
+  .dd-r { right:-32px; top:50%; transform:translateY(-50%) rotate(45deg); }
+
+  /* Hero text */
+  .hero-text { text-align:center; z-index:1; opacity:0; animation:revUp 0.8s 1s ease forwards; }
+  .h-event-type {
+    font-size:clamp(0.68rem,2vw,0.83rem); letter-spacing:0.35em; text-transform:uppercase;
+    color:var(--green-dark); font-weight:700; margin-bottom:6px;
+  }
+  .h-name {
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(2.6rem,9vw,4.4rem);
+    color:var(--maroon); line-height:1.1;
+    text-shadow:2px 2px 10px rgba(122,30,46,0.14);
+    margin-bottom:4px;
+  }
+  .h-subname {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(0.82rem,2.5vw,0.98rem);
+    color:var(--brown-text); font-style:italic; margin-bottom:18px;
+  }
+
+  /* Gold divider */
+  .gd {
+    display:flex; align-items:center; gap:14px;
+    justify-content:center;
+    opacity:0; animation:revUp 0.8s 1.2s ease forwards;
+  }
+  .gd::before, .gd::after {
+    content:''; flex:1; max-width:64px; height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold));
+  }
+  .gd::after { background:linear-gradient(90deg,var(--gold),transparent); }
+  .gd-icon { color:var(--gold); font-size:0.95rem; }
+
+  /* Doa text */
+  .h-doa {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(0.83rem,2.2vw,0.94rem);
+    color:var(--brown-text); text-align:center; line-height:1.85;
+    max-width:355px; font-style:italic; padding:0 18px;
+    opacity:0; animation:revUp 0.8s 1.4s ease forwards;
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    margin-top:22px; opacity:0; animation:revUp 0.8s 2s ease forwards;
+  }
+  .sc-txt { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--green-dark); opacity:0.68; }
+  .sc-box {
+    width:20px; height:30px; border:1.5px solid rgba(45,90,39,0.4);
+    border-radius:10px; position:relative;
+  }
+  .sc-box::after {
+    content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%);
+    width:4px; height:8px; background:var(--green-dark); border-radius:2px;
+    animation:scDot 1.5s ease-in-out infinite;
+  }
+  @keyframes scDot { 0%,100%{transform:translateX(-50%) translateY(0);opacity:1;} 100%{transform:translateX(-50%) translateY(12px);opacity:0;} }
+
+  /* ---- RIBBON ---- */
+  .ribbon {
+    background:linear-gradient(135deg,var(--maroon),#9e3040);
+    color:white; text-align:center; padding:15px 24px; position:relative; overflow:hidden;
+  }
+  .ribbon::before {
+    content:''; position:absolute; inset:0;
+    background:repeating-linear-gradient(45deg,transparent,transparent 22px,rgba(255,255,255,0.03) 22px,rgba(255,255,255,0.03) 44px);
+  }
+  .ribbon p { font-family:'Cormorant Garamond',serif; font-size:clamp(0.9rem,2.8vw,1.1rem); font-style:italic; position:relative; z-index:1; letter-spacing:0.04em; }
+
+  /* ---- SECTION BASE ---- */
+  .section { padding:48px 22px; position:relative; overflow:hidden; }
+  .alt-bg { background:linear-gradient(160deg,#faf6ee 0%,#f5f0e4 100%); }
+
+  .sec-head { text-align:center; margin-bottom:30px; }
+  .sec-tag { font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--green-dark); font-weight:700; display:block; margin-bottom:8px; }
+  .sec-title { font-family:'Great Vibes',cursive; font-size:clamp(1.9rem,5.5vw,2.7rem); color:var(--maroon); }
+
+  /* ---- DETAILS ---- */
+  .details-sec {
+    background:linear-gradient(158deg,#2d5a27 0%,#1c3a18 100%);
+    color:white;
+  }
+  .details-sec .sec-tag { color:var(--gold-light); }
+  .details-sec .sec-title { color:var(--gold-light); }
+
+  .inv-card {
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(201,168,76,0.3); border-radius:18px;
+    padding:26px 22px; max-width:500px; margin:0 auto;
+    backdrop-filter:blur(12px); position:relative; overflow:hidden;
+  }
+  /* .inv-card::before {
+    content:''; position:absolute; top:-40% left:-40%;
+    width:180%; height:180%;
+    background:radial-gradient(circle at 50% 0%,rgba(201,168,76,0.08),transparent 60%);
+    pointer-events:none;
+  } */
+  .inv-text {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(0.88rem,2.5vw,0.98rem);
+    color:rgba(255,255,255,0.85); text-align:center; line-height:1.85;
+    font-style:italic; margin-bottom:22px;
+  }
+  .inv-div { width:55px; height:1px; background:var(--gold); margin:0 auto 22px; opacity:0.55; }
+
+  /* Countdown */
+  .cd-wrap { display:flex; justify-content:center; gap:clamp(10px,2.5vw,22px); margin:18px 0; flex-wrap:wrap; }
+  .cd-item { text-align:center; min-width:54px; }
+  .cd-num { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,5.5vw,2.8rem); color:var(--gold-light); font-weight:600; line-height:1; display:block; text-shadow:0 2px 12px rgba(201,168,76,0.3); }
+  .cd-lbl { font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-top:3px; }
+  .cd-sep { font-size:2.2rem; color:var(--gold); opacity:0.5; align-self:flex-start; padding-top:4px; font-family:'Cormorant Garamond',serif; }
+
+  .det-row {
+    display:flex; align-items:flex-start; gap:14px;
+    margin-bottom:16px; padding:15px;
+    background:rgba(255,255,255,0.06);
+    border-radius:12px; border:1px solid rgba(201,168,76,0.15);
+  }
+  .det-icon {
+    width:42px; height:42px; min-width:42px;
+    background:linear-gradient(135deg,rgba(201,168,76,0.22),rgba(201,168,76,0.1));
+    border:1px solid rgba(201,168,76,0.4); border-radius:10px;
+    display:flex; align-items:center; justify-content:center; font-size:1.15rem;
+  }
+  .det-info { flex:1; }
+  .det-lbl { font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); font-weight:700; margin-bottom:3px; }
+  .det-val { font-family:'Cormorant Garamond',serif; font-size:clamp(0.98rem,3vw,1.12rem); color:white; font-weight:500; line-height:1.4; }
+  .det-sub { font-size:0.78rem; color:rgba(255,255,255,0.58); margin-top:2px; }
+
+  /* ---- LOCATION ---- */
+  .loc-card {
+    background:white; border-radius:20px; overflow:hidden;
+    box-shadow:0 8px 32px rgba(44,24,16,0.1);
+    max-width:500px; margin:0 auto;
+    border:1px solid rgba(201,168,76,0.2);
+  }
+  .map-area {
+    width:100%; height:175px;
+    background:linear-gradient(135deg,#d4e8d0 0%,#b8d4b4 100%);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden; cursor:pointer;
+  }
+  .map-area::before {
+    content:''; position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.28) 38px,rgba(255,255,255,0.28) 39px),
+      repeating-linear-gradient(90deg,transparent,transparent 38px,rgba(255,255,255,0.28) 38px,rgba(255,255,255,0.28) 39px);
+  }
+  .map-pin { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; animation:pinBounce 2s ease-in-out infinite; }
+  @keyframes pinBounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);} }
+  .pin-head {
+    width:46px; height:46px; background:var(--maroon); border-radius:50% 50% 50% 0;
+    transform:rotate(-45deg); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 14px rgba(122,30,46,0.45);
+  }
+  .pin-head span { transform:rotate(45deg); font-size:1.2rem; }
+  .pin-shadow { width:18px; height:5px; background:rgba(0,0,0,0.14); border-radius:50%; margin-top:3px; }
+  .map-btn {
+    position:absolute; bottom:10px; right:10px;
+    background:var(--green-dark); color:white;
+    font-size:0.7rem; padding:6px 14px; border-radius:20px;
+    font-family:'Nunito',sans-serif; font-weight:700;
+    text-decoration:none; cursor:pointer; display:flex; align-items:center; gap:5px;
+    transition:background 0.2s;
+    border:none;
+  }
+  .map-btn:hover { background:var(--green-mid); }
+  .loc-info { padding:18px 22px; }
+  .loc-name { font-family:'Cormorant Garamond',serif; font-size:1.12rem; font-weight:600; color:var(--brown-text); margin-bottom:5px; }
+  .loc-addr { font-size:0.83rem; color:#888; line-height:1.6; }
+  .loc-dir-btn {
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--green-dark); color:white;
+    padding:9px 20px; border-radius:20px; font-size:0.78rem;
+    font-family:'Nunito',sans-serif; font-weight:700;
+    text-decoration:none; margin-top:13px; transition:0.2s;
+    border:none; cursor:pointer;
+  }
+  .loc-dir-btn:hover { background:var(--green-mid); }
+
+  /* ---- DOA ---- */
+  .doa-sec {
+    background:linear-gradient(160deg,#faf6ee 0%,#f0e8d6 100%);
+    text-align:center; padding:50px 22px; position:relative; overflow:hidden;
+  }
+  .doa-arabic { font-size:clamp(1.5rem,4.5vw,1.9rem); color:var(--green-dark); margin:16px 0; line-height:2; direction:rtl; font-family:'Cormorant Garamond',serif; }
+  .doa-latin { font-family:'Cormorant Garamond',serif; font-size:clamp(0.88rem,2.4vw,1.02rem); color:var(--brown-text); font-style:italic; line-height:1.85; max-width:400px; margin:0 auto 12px; }
+  .doa-trans { font-size:0.83rem; color:#888; max-width:360px; margin:0 auto; line-height:1.6; }
+
+  /* ---- RSVP ---- */
+  .rsvp-sec {
+    background:linear-gradient(133deg,#2d5a27 0%,#1a3a16 100%);
+    padding:50px 22px; text-align:center; position:relative; overflow:hidden;
+  }
+  .rsvp-sec::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 22% 50%,rgba(201,168,76,0.07) 0%,transparent 58%),
+               radial-gradient(circle at 78% 50%,rgba(255,255,255,0.04) 0%,transparent 58%);
+  }
+  .rsvp-title { font-family:'Great Vibes',cursive; font-size:clamp(1.9rem,5.5vw,2.7rem); color:var(--gold-light); margin-bottom:8px; }
+  .rsvp-sub { font-family:'Cormorant Garamond',serif; font-size:0.93rem; color:rgba(255,255,255,0.7); font-style:italic; margin-bottom:26px; line-height:1.65; }
+  .rsvp-family { font-family:'Cormorant Garamond',serif; font-style:italic; color:rgba(255,255,255,0.65); margin-bottom:22px; font-size:0.88rem; }
+  .rsvp-family strong { font-size:1.05rem; color:rgba(201,168,76,0.88); display:block; margin-top:4px; }
+
+  .btn-grp { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
+  .btn-p {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px; background:linear-gradient(135deg,var(--gold),#a87c2a);
+    color:var(--text-dark); font-family:'Nunito',sans-serif;
+    font-weight:800; font-size:0.83rem; letter-spacing:0.04em;
+    border-radius:50px; border:none; cursor:pointer; text-decoration:none;
+    transition:all 0.3s; box-shadow:0 6px 20px rgba(201,168,76,0.35);
+  }
+  .btn-p:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(201,168,76,0.45); }
+  .btn-s {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px; background:transparent;
+    color:white; font-family:'Nunito',sans-serif;
+    font-weight:600; font-size:0.83rem; letter-spacing:0.04em;
+    border-radius:50px; border:1.5px solid rgba(255,255,255,0.38);
+    cursor:pointer; text-decoration:none; transition:all 0.3s;
+  }
+  .btn-s:hover { background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.65); transform:translateY(-3px); }
+
+  /* ---- CLOSING ---- */
+  .closing-sec {
+    background:linear-gradient(160deg,#faf6ee 0%,#f0e8d6 100%);
+    padding:50px 22px 42px; text-align:center; position:relative; overflow:hidden;
+  }
+  .cl-family { font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:var(--brown-text); font-style:italic; margin-bottom:4px; opacity:0.78; }
+  .cl-name { font-family:'Cormorant Garamond',serif; font-size:clamp(1.1rem,3.2vw,1.42rem); color:var(--green-dark); font-weight:600; margin-bottom:18px; }
+  .cl-quote { font-family:'Great Vibes',cursive; font-size:clamp(1.4rem,4.5vw,1.9rem); color:var(--maroon); line-height:1.5; }
+  .cl-trans { font-family:'Cormorant Garamond',serif; font-size:0.83rem; color:var(--brown-text); font-style:italic; margin-top:7px; opacity:0.68; }
+  .cl-credit { margin-top:26px; font-size:0.68rem; color:#aaa; letter-spacing:0.1em; }
+
+  /* ===================== BOTTOM NAVBAR ===================== */
+  .bottom-nav {
+    position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+    z-index:200; display:none; align-items:center; justify-content:space-around;
+    width:clamp(268px,82vw,365px); padding:9px 18px;
+    background:linear-gradient(135deg,rgba(45,90,39,0.96),rgba(26,58,22,0.96));
+    border-radius:50px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.1);
+    backdrop-filter:blur(22px);
+    border:1px solid rgba(201,168,76,0.28);
+    gap:2px;
+  }
+  .bottom-nav.visible { display:flex; animation:navIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+  @keyframes navIn { from{opacity:0;transform:translateX(-50%) translateY(30px);} to{opacity:1;transform:translateX(-50%) translateY(0);} }
+
+  .nav-item {
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    cursor:pointer; padding:6px 10px; border-radius:24px;
+    transition:all 0.3s; flex:1; text-decoration:none;
+    color:rgba(255,255,255,0.55); min-width:0; position:relative;
+  }
+  .nav-item.active { background:rgba(201,168,76,0.22); color:var(--gold-light); }
+  .nav-item:hover:not(.active) { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.88); }
+  .nav-ico { font-size:1.08rem; line-height:1; }
+  .nav-lbl { font-family:'Nunito',sans-serif; font-size:0.58rem; font-weight:700; letter-spacing:0.04em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+  .nav-dot { position:absolute; top:4px; right:6px; width:5px; height:5px; background:var(--gold); border-radius:50%; display:none; }
+  .nav-item.active .nav-dot { display:block; }
+
+  /* ===================== ANIMATIONS ===================== */
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(36px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes fadeInDown { from{opacity:0;transform:translateY(-28px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes revUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes revScale { from{opacity:0;transform:scale(0.72);} to{opacity:1;transform:scale(1);} }
+
+  .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* Particles */
+  #particles { position:fixed; inset:0; pointer-events:none; z-index:1; display:none; }
+  #particles.visible { display:block; }
+  .pt { position:absolute; animation:ptFall linear infinite; }
+  @keyframes ptFall {
+    0%{transform:translateY(-20px) rotate(0);opacity:0;}
+    10%{opacity:1;}
+    90%{opacity:0.3;}
+    100%{transform:translateY(105vh) rotate(400deg);opacity:0;}
+  }
+
+  @media(min-width:640px){
+    .inv-card{padding:32px 32px;}
+    .det-row{padding:18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- ==================== ENVELOPE SCREEN ==================== -->
+<div id="envelope-screen">
+
+  <!-- Sparkles -->
+  <div class="bg-sparkle sparkle-tl"><svg width="55" height="55" viewBox="0 0 60 60"><path d="M30 4L33 26L55 30L33 34L30 56L27 34L5 30L27 26Z" fill="#c9a84c"/></svg></div>
+  <div class="bg-sparkle sparkle-tr"><svg width="40" height="40" viewBox="0 0 60 60"><path d="M30 4L33 26L55 30L33 34L30 56L27 34L5 30L27 26Z" fill="#c9a84c"/></svg></div>
+  <div class="bg-sparkle sparkle-bl"><svg width="30" height="30" viewBox="0 0 60 60"><path d="M30 4L33 26L55 30L33 34L30 56L27 34L5 30L27 26Z" fill="#2d5a27"/></svg></div>
+  <div class="bg-sparkle sparkle-br"><svg width="46" height="46" viewBox="0 0 60 60"><path d="M30 4L33 26L55 30L33 34L30 56L27 34L5 30L27 26Z" fill="#c9a84c"/></svg></div>
+  <div class="bg-sparkle sparkle-c1"><svg width="22" height="22" viewBox="0 0 60 60"><path d="M30 4L33 26L55 30L33 34L30 56L27 34L5 30L27 26Z" fill="#7a1e2e"/></svg></div>
+  <div class="bg-sparkle sparkle-c2"><svg width="28" height="28" viewBox="0 0 60 60"><path d="M30 4L33 26L55 30L33 34L30 56L27 34L5 30L27 26Z" fill="#c9a84c"/></svg></div>
+
+  <!-- Floral corners -->
+  <svg class="env-screen-floral esf-tl" viewBox="0 0 220 220" fill="none">
+    <path d="M5,5 Q60,0 75,45 Q90,90 55,100 Q20,110 12,70 Q4,30 40,22" stroke="#5a9e50" stroke-width="2" fill="rgba(90,158,80,0.07)"/>
+    <circle cx="75" cy="45" r="27" fill="rgba(250,246,238,0.92)" stroke="#c9a84c" stroke-width="1.5"/>
+    <circle cx="75" cy="45" r="15" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="1"/>
+    <circle cx="75" cy="45" r="6" fill="rgba(201,168,76,0.44)"/>
+    <ellipse cx="54" cy="28" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(-28 54 28)"/>
+    <ellipse cx="96" cy="28" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(28 96 28)"/>
+    <ellipse cx="54" cy="62" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(28 54 62)"/>
+    <ellipse cx="96" cy="62" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(-28 96 62)"/>
+    <ellipse cx="30" cy="62" rx="18" ry="7" fill="rgba(90,158,80,0.28)" transform="rotate(-40 30 62)"/>
+    <ellipse cx="64" cy="92" rx="22" ry="8" fill="rgba(90,158,80,0.22)" transform="rotate(-20 64 92)"/>
+    <ellipse cx="96" cy="90" rx="20" ry="7" fill="rgba(90,158,80,0.2)" transform="rotate(10 96 90)"/>
+    <path d="M8,82 Q40,46 88,16" stroke="#5a9e50" stroke-width="1.5" fill="none" opacity="0.68"/>
+    <path d="M22,112 Q62,72 112,32" stroke="#5a9e50" stroke-width="1" fill="none" opacity="0.4"/>
+    <circle cx="110" cy="40" r="10" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+    <circle cx="110" cy="40" r="5" fill="rgba(201,168,76,0.34)"/>
+    <circle cx="36" cy="108" r="9" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+    <circle cx="36" cy="108" r="4" fill="rgba(201,168,76,0.34)"/>
+    <circle cx="120" cy="78" r="7" fill="rgba(250,246,238,0.85)" stroke="#c9a84c" stroke-width="0.7"/>
+    <circle cx="120" cy="78" r="3" fill="rgba(201,168,76,0.3)"/>
+  </svg>
+  <svg class="env-screen-floral esf-br" viewBox="0 0 220 220" fill="none">
+    <path d="M5,5 Q60,0 75,45 Q90,90 55,100 Q20,110 12,70 Q4,30 40,22" stroke="#5a9e50" stroke-width="2" fill="rgba(90,158,80,0.07)"/>
+    <circle cx="75" cy="45" r="27" fill="rgba(250,246,238,0.92)" stroke="#c9a84c" stroke-width="1.5"/>
+    <circle cx="75" cy="45" r="15" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="1"/>
+    <circle cx="75" cy="45" r="6" fill="rgba(201,168,76,0.44)"/>
+    <ellipse cx="54" cy="28" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(-28 54 28)"/>
+    <ellipse cx="96" cy="28" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(28 96 28)"/>
+    <ellipse cx="30" cy="62" rx="18" ry="7" fill="rgba(90,158,80,0.28)" transform="rotate(-40 30 62)"/>
+    <ellipse cx="64" cy="92" rx="22" ry="8" fill="rgba(90,158,80,0.22)" transform="rotate(-20 64 92)"/>
+    <circle cx="110" cy="40" r="10" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+    <circle cx="110" cy="40" r="5" fill="rgba(201,168,76,0.34)"/>
+    <circle cx="36" cy="108" r="9" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+    <circle cx="36" cy="108" r="4" fill="rgba(201,168,76,0.34)"/>
+  </svg>
+  <svg class="env-screen-floral esf-tr" viewBox="0 0 160 160" fill="none">
+    <path d="M5,5 Q42,0 52,30 Q62,60 40,68 Q18,76 12,50 Q6,24 30,18" stroke="#5a9e50" stroke-width="1.8" fill="rgba(90,158,80,0.07)"/>
+    <circle cx="52" cy="30" r="20" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="1.2"/>
+    <circle cx="52" cy="30" r="11" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+    <circle cx="52" cy="30" r="5" fill="rgba(201,168,76,0.44)"/>
+    <ellipse cx="37" cy="18" rx="11" ry="6" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(-28 37 18)"/>
+    <ellipse cx="67" cy="18" rx="11" ry="6" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(28 67 18)"/>
+    <ellipse cx="20" cy="46" rx="14" ry="5.5" fill="rgba(90,158,80,0.25)" transform="rotate(-38 20 46)"/>
+    <circle cx="80" cy="24" r="8" fill="rgba(250,246,238,0.86)" stroke="#c9a84c" stroke-width="0.7"/>
+    <circle cx="80" cy="24" r="3.5" fill="rgba(201,168,76,0.34)"/>
+  </svg>
+  <svg class="env-screen-floral esf-bl" viewBox="0 0 160 160" fill="none">
+    <path d="M5,5 Q42,0 52,30 Q62,60 40,68 Q18,76 12,50 Q6,24 30,18" stroke="#5a9e50" stroke-width="1.8" fill="rgba(90,158,80,0.07)"/>
+    <circle cx="52" cy="30" r="20" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="1.2"/>
+    <circle cx="52" cy="30" r="11" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+    <circle cx="52" cy="30" r="5" fill="rgba(201,168,76,0.44)"/>
+    <ellipse cx="20" cy="46" rx="14" ry="5.5" fill="rgba(90,158,80,0.25)" transform="rotate(-38 20 46)"/>
+    <circle cx="80" cy="24" r="8" fill="rgba(250,246,238,0.86)" stroke="#c9a84c" stroke-width="0.7"/>
+    <circle cx="80" cy="24" r="3.5" fill="rgba(201,168,76,0.34)"/>
+  </svg>
+
+  <div class="envelope-wrapper">
+    <div class="envelope-intro">
+      <p class="sub">✦ Undangan Khitanan ✦</p>
+      <p class="ttl">Bismillahirrahmanirrahim</p>
+    </div>
+
+    <!-- THE ENVELOPE -->
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="env-body">
+        <div class="env-flap"></div>
+
+        <!-- Floral on envelope -->
+        <svg class="env-fl-tl" viewBox="0 0 130 130" fill="none">
+          <path d="M5,5 Q38,0 46,26 Q54,52 34,58 Q14,64 10,42 Q6,20 28,14" stroke="#5a9e50" stroke-width="1.5" fill="rgba(90,158,80,0.08)"/>
+          <circle cx="46" cy="26" r="17" fill="rgba(250,246,238,0.94)" stroke="#c9a84c" stroke-width="1.2"/>
+          <circle cx="46" cy="26" r="9" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+          <circle cx="46" cy="26" r="4" fill="rgba(201,168,76,0.5)"/>
+          <ellipse cx="33" cy="16" rx="10" ry="6" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(-28 33 16)"/>
+          <ellipse cx="59" cy="16" rx="10" ry="6" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(28 59 16)"/>
+          <ellipse cx="33" cy="36" rx="10" ry="6" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(28 33 36)"/>
+          <ellipse cx="59" cy="36" rx="10" ry="6" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(-28 59 36)"/>
+          <ellipse cx="22" cy="38" rx="12" ry="5" fill="rgba(90,158,80,0.24)" transform="rotate(-36 22 38)"/>
+          <ellipse cx="42" cy="55" rx="14" ry="5.5" fill="rgba(90,158,80,0.18)" transform="rotate(-16 42 55)"/>
+          <circle cx="70" cy="22" r="7.5" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="0.8"/>
+          <circle cx="70" cy="22" r="3.5" fill="rgba(201,168,76,0.4)"/>
+          <circle cx="24" cy="70" r="6.5" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="0.7"/>
+          <circle cx="24" cy="70" r="3" fill="rgba(201,168,76,0.38)"/>
+          <path d="M5,52 Q28,22 60,6" stroke="#5a9e50" stroke-width="1.5" fill="none" opacity="0.65"/>
+        </svg>
+        <svg class="env-fl-br" viewBox="0 0 110 110" fill="none">
+          <path d="M5,5 Q34,0 42,24 Q50,48 32,54 Q14,60 10,40 Q6,20 26,14" stroke="#5a9e50" stroke-width="1.5" fill="rgba(90,158,80,0.08)"/>
+          <circle cx="42" cy="24" r="15" fill="rgba(250,246,238,0.94)" stroke="#c9a84c" stroke-width="1"/>
+          <circle cx="42" cy="24" r="8" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="0.7"/>
+          <circle cx="42" cy="24" r="3.5" fill="rgba(201,168,76,0.5)"/>
+          <ellipse cx="20" cy="36" rx="11" ry="4.5" fill="rgba(90,158,80,0.24)" transform="rotate(-36 20 36)"/>
+          <ellipse cx="38" cy="50" rx="13" ry="5" fill="rgba(90,158,80,0.18)" transform="rotate(-16 38 50)"/>
+          <circle cx="62" cy="20" r="7" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="0.7"/>
+          <circle cx="62" cy="20" r="3" fill="rgba(201,168,76,0.38)"/>
+        </svg>
+
+        <!-- Wax seal -->
+        <div class="wax-seal">
+          <div class="wax-star">✦</div>
+          <span>Buka<br>Undangan</span>
+        </div>
+      </div>
+
+      <!-- Dot sparkles -->
+      <div class="dot-sp" style="top:8%;left:6%;animation-delay:0s;"></div>
+      <div class="dot-sp" style="top:5%;right:8%;animation-delay:1.2s;"></div>
+      <div class="dot-sp" style="bottom:22%;left:4%;animation-delay:2.2s;"></div>
+      <div class="dot-sp" style="bottom:12%;right:6%;animation-delay:0.6s;"></div>
+    </div>
+
+    <p class="env-hint">✦ Ketuk Amplop untuk Membuka ✦</p>
+  </div>
+</div>
+
+<!-- ==================== OPENING OVERLAY ==================== -->
+<div id="opening-overlay">
+  <div class="opening-env-wrap">
+    <svg viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="eg" x1="0" y1="0" x2="400" y2="250"><stop offset="0%" stop-color="#faf6ee"/><stop offset="100%" stop-color="#ede0c4"/></linearGradient>
+        <linearGradient id="fg" x1="0" y1="0" x2="200" y2="145"><stop offset="0%" stop-color="#f5f0e8"/><stop offset="100%" stop-color="#e8d8b8"/></linearGradient>
+      </defs>
+      <rect width="400" height="250" rx="4" fill="url(#eg)"/>
+      <rect x="1" y="1" width="398" height="248" rx="3" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.45"/>
+      <polygon points="0,0 400,0 200,145" fill="url(#fg)" opacity="0.88"/>
+      <polygon points="0,0 200,115 0,250" fill="rgba(201,168,76,0.07)"/>
+      <polygon points="400,0 200,115 400,250" fill="rgba(201,168,76,0.07)"/>
+      <circle cx="200" cy="125" r="42" fill="#7a1e2e" opacity="0.92"/>
+      <circle cx="200" cy="125" r="36" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+      <text x="200" y="120" text-anchor="middle" fill="#e8cc80" font-size="10.5" font-family="Cormorant Garamond,serif">Buka</text>
+      <text x="200" y="136" text-anchor="middle" fill="#e8cc80" font-size="10.5" font-family="Cormorant Garamond,serif">Undangan</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ==================== MAIN INVITATION ==================== -->
+<div id="main-invitation">
+
+  <!-- HERO -->
+  <div class="hero" id="page-home">
+    <div class="hero-bg"></div>
+
+    <!-- Florals -->
+    <svg class="hfl hfl-tl" viewBox="0 0 220 220" fill="none">
+      <path d="M5,5 Q60,0 75,45 Q90,90 55,100 Q20,110 12,70 Q4,30 40,22" stroke="#5a9e50" stroke-width="2" fill="rgba(90,158,80,0.07)"/>
+      <circle cx="75" cy="45" r="27" fill="rgba(250,246,238,0.92)" stroke="#c9a84c" stroke-width="1.5"/>
+      <circle cx="75" cy="45" r="15" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="1"/>
+      <circle cx="75" cy="45" r="6" fill="rgba(201,168,76,0.44)"/>
+      <ellipse cx="54" cy="28" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(-28 54 28)"/>
+      <ellipse cx="96" cy="28" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(28 96 28)"/>
+      <ellipse cx="54" cy="62" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(28 54 62)"/>
+      <ellipse cx="96" cy="62" rx="13" ry="7.5" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(-28 96 62)"/>
+      <ellipse cx="30" cy="62" rx="18" ry="7" fill="rgba(90,158,80,0.28)" transform="rotate(-40 30 62)"/>
+      <ellipse cx="64" cy="92" rx="22" ry="8" fill="rgba(90,158,80,0.22)" transform="rotate(-20 64 92)"/>
+      <ellipse cx="96" cy="90" rx="20" ry="7" fill="rgba(90,158,80,0.2)" transform="rotate(10 96 90)"/>
+      <path d="M8,82 Q40,46 88,16" stroke="#5a9e50" stroke-width="1.5" fill="none" opacity="0.68"/>
+      <path d="M22,112 Q62,72 112,32" stroke="#5a9e50" stroke-width="1" fill="none" opacity="0.4"/>
+      <circle cx="110" cy="40" r="10" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+      <circle cx="110" cy="40" r="5" fill="rgba(201,168,76,0.34)"/>
+      <circle cx="36" cy="108" r="9" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+      <circle cx="36" cy="108" r="4" fill="rgba(201,168,76,0.34)"/>
+      <circle cx="120" cy="78" r="7" fill="rgba(250,246,238,0.85)" stroke="#c9a84c" stroke-width="0.7"/>
+      <circle cx="120" cy="78" r="3" fill="rgba(201,168,76,0.3)"/>
+    </svg>
+    <svg class="hfl hfl-br" viewBox="0 0 200 200" fill="none">
+      <path d="M5,5 Q52,0 65,40 Q78,80 48,88 Q18,96 12,62 Q6,28 36,20" stroke="#5a9e50" stroke-width="2" fill="rgba(90,158,80,0.07)"/>
+      <circle cx="65" cy="40" r="24" fill="rgba(250,246,238,0.92)" stroke="#c9a84c" stroke-width="1.5"/>
+      <circle cx="65" cy="40" r="13" fill="rgba(240,232,214,0.88)" stroke="#c9a84c" stroke-width="1"/>
+      <circle cx="65" cy="40" r="5.5" fill="rgba(201,168,76,0.44)"/>
+      <ellipse cx="47" cy="24" rx="12" ry="7" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(-28 47 24)"/>
+      <ellipse cx="83" cy="24" rx="12" ry="7" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(28 83 24)"/>
+      <ellipse cx="47" cy="56" rx="12" ry="7" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(28 47 56)"/>
+      <ellipse cx="83" cy="56" rx="12" ry="7" fill="rgba(250,246,238,0.84)" stroke="#c9a84c" stroke-width="0.8" transform="rotate(-28 83 56)"/>
+      <ellipse cx="26" cy="56" rx="16" ry="6.5" fill="rgba(90,158,80,0.28)" transform="rotate(-40 26 56)"/>
+      <ellipse cx="56" cy="82" rx="20" ry="7" fill="rgba(90,158,80,0.22)" transform="rotate(-20 56 82)"/>
+      <path d="M8,72 Q36,40 72,12" stroke="#5a9e50" stroke-width="1.5" fill="none" opacity="0.68"/>
+      <circle cx="94" cy="32" r="9" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+      <circle cx="94" cy="32" r="4" fill="rgba(201,168,76,0.34)"/>
+      <circle cx="30" cy="94" r="8" fill="rgba(250,246,238,0.88)" stroke="#c9a84c" stroke-width="0.8"/>
+      <circle cx="30" cy="94" r="3.5" fill="rgba(201,168,76,0.34)"/>
+    </svg>
+    <svg class="hfl hfl-tr" viewBox="0 0 155 155" fill="none">
+      <path d="M5,5 Q40,0 50,28 Q60,56 38,64 Q16,72 10,48 Q4,24 28,17" stroke="#5a9e50" stroke-width="1.6" fill="rgba(90,158,80,0.07)"/>
+      <circle cx="50" cy="28" r="19" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="1.1"/>
+      <circle cx="50" cy="28" r="10" fill="rgba(240,232,214,0.86)" stroke="#c9a84c" stroke-width="0.7"/>
+      <circle cx="50" cy="28" r="4.5" fill="rgba(201,168,76,0.44)"/>
+      <ellipse cx="36" cy="17" rx="10" ry="5.5" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(-28 36 17)"/>
+      <ellipse cx="64" cy="17" rx="10" ry="5.5" fill="rgba(250,246,238,0.82)" stroke="#c9a84c" stroke-width="0.7" transform="rotate(28 64 17)"/>
+      <ellipse cx="19" cy="44" rx="13" ry="5.2" fill="rgba(90,158,80,0.25)" transform="rotate(-37 19 44)"/>
+      <circle cx="76" cy="21" r="7.5" fill="rgba(250,246,238,0.86)" stroke="#c9a84c" stroke-width="0.7"/>
+      <circle cx="76" cy="21" r="3.2" fill="rgba(201,168,76,0.34)"/>
+    </svg>
+    <svg class="hfl hfl-bl" viewBox="0 0 135 135" fill="none">
+      <path d="M5,5 Q36,0 44,26 Q52,52 34,58 Q16,64 10,44 Q4,24 26,17" stroke="#5a9e50" stroke-width="1.5" fill="rgba(90,158,80,0.07)"/>
+      <circle cx="44" cy="26" r="17" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="1"/>
+      <circle cx="44" cy="26" r="9" fill="rgba(240,232,214,0.86)" stroke="#c9a84c" stroke-width="0.7"/>
+      <circle cx="44" cy="26" r="4" fill="rgba(201,168,76,0.44)"/>
+      <ellipse cx="18" cy="40" rx="12" ry="4.8" fill="rgba(90,158,80,0.25)" transform="rotate(-36 18 40)"/>
+      <circle cx="68" cy="18" r="7" fill="rgba(250,246,238,0.86)" stroke="#c9a84c" stroke-width="0.7"/>
+      <circle cx="68" cy="18" r="3" fill="rgba(201,168,76,0.34)"/>
+    </svg>
+
+    <!-- Gold geometric frame -->
+    <svg class="geo-frame" viewBox="0 0 400 490" fill="none">
+      <rect x="10" y="10" width="380" height="470" stroke="#c9a84c" stroke-width="1" opacity="0.28"/>
+      <rect x="20" y="20" width="360" height="450" stroke="#c9a84c" stroke-width="0.5" opacity="0.16"/>
+      <path d="M10,10 L42,10 M10,10 L10,42" stroke="#c9a84c" stroke-width="2.2" opacity="0.58"/>
+      <path d="M390,10 L358,10 M390,10 L390,42" stroke="#c9a84c" stroke-width="2.2" opacity="0.58"/>
+      <path d="M10,480 L42,480 M10,480 L10,448" stroke="#c9a84c" stroke-width="2.2" opacity="0.58"/>
+      <path d="M390,480 L358,480 M390,480 L390,448" stroke="#c9a84c" stroke-width="2.2" opacity="0.58"/>
+      <polygon points="10,10 17,3 24,10 17,17" fill="#c9a84c" opacity="0.48"/>
+      <polygon points="390,10 397,3 404,10 397,17" fill="#c9a84c" opacity="0.48"/>
+      <polygon points="10,480 17,473 24,480 17,487" fill="#c9a84c" opacity="0.48"/>
+      <polygon points="390,480 397,473 404,480 397,487" fill="#c9a84c" opacity="0.48"/>
+    </svg>
+
+    <!-- Content -->
+    <p class="bismillah"> &nbsp; Bismillahirrahmanirrahim</p>
+
+    <div class="photo-wrap">
+      <div class="photo-ring"></div>
+      <div class="photo-diamond"></div>
+      <div class="photo-circle">
+        <img src="Raditya.jpeg" alt="Raditya P. Pratama"
+          onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect fill=%22%23f0e8d6%22 width=%22200%22 height=%22200%22/><text x=%22100%22 y=%22110%22 text-anchor=%22middle%22 font-size=%2236%22 font-family=%22serif%22>👦</text></svg>'">
+      </div>
+      <div class="dd dd-t"></div>
+      <div class="dd dd-b"></div>
+      <div class="dd dd-l"></div>
+      <div class="dd dd-r"></div>
+    </div>
+
+    <div class="hero-text">
+      <p class="h-event-type">✦ Undangan Khitanan ✦</p>
+      <h1 class="h-name">Raditya P. Pratama</h1>
+      <p class="h-subname">(Putra dari Bpk. Ari & Ibu Muslikhah)</p>
+    </div>
+
+    <div class="gd" style="margin:10px 0;">
+      <span class="gd-icon">✦</span>
+    </div>
+
+    <p class="h-doa">
+      Ya Allah, muliakanlah ia, kokohkan imannya,<br>
+      lapangkanlah rezekinya dan arahkanlah<br>
+      selalu kepada kebaikan.
+    </p>
+
+    <div class="scroll-hint">
+      <span class="sc-txt">Geser ke bawah</span>
+      <div class="sc-box"></div>
+    </div>
+  </div>
+
+  <!-- RIBBON -->
+  <div class="ribbon reveal">
+    <p>Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir</p>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="section details-sec" id="page-detail">
+    <div class="sec-head reveal">
+      <span class="sec-tag">✦ Informasi Acara ✦</span>
+      <h2 class="sec-title">Waktu &  Tempat</h2>
+    </div>
+
+    <div class="inv-card reveal">
+      <p class="inv-text">
+        Assalamualaikum Warahmatullahi Wabarakatuh<br>
+        Dengan memohon Rahmat dan Ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara Khitanan putra kami :
+      </p>
+      <div class="inv-div"></div>
+
+      <!-- Countdown -->
+      <div style="text-align:center;margin-bottom:20px;">
+        <p style="font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,168,76,0.75);margin-bottom:10px;font-weight:600;">✦ Hitung Mundur ✦</p>
+        <div class="cd-wrap">
+          <div class="cd-item"><span class="cd-num" id="cd-d">00</span><span class="cd-lbl">Hari</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-item"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl">Jam</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-item"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">Menit</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-item"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">Detik</span></div>
+        </div>
+      </div>
+
+      <div class="det-row reveal">
+        <div class="det-icon">📅</div>
+        <div class="det-info">
+          <p class="det-lbl">Hari & Tanggal</p>
+          <p class="det-val">Sabtu – Minggu</p>
+          <p class="det-sub">25 – 29 Maret 2026</p>
+        </div>
+      </div>
+      <div class="det-row reveal">
+        <div class="det-icon">🕐</div>
+        <div class="det-info">
+          <p class="det-lbl">Waktu</p>
+          <p class="det-val">07.30 WIB</p>
+          <p class="det-sub">s/d Selesai</p>
+        </div>
+      </div>
+      <div class="det-row reveal">
+        <div class="det-icon">📍</div>
+        <div class="det-info">
+          <p class="det-lbl">Tempat</p>
+          <p class="det-val">Rt. 02 Rw. 0l, Sukawarah</p>
+          <p class="det-sub">Kalijaran, Karanganyar, Purbalingga</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="section alt-bg" id="page-lokasi">
+    <div class="sec-head reveal">
+      <span class="sec-tag">✦ Lokasi ✦</span>
+      <h2 class="sec-title">Peta Lokasi</h2>
+    </div>
+    <div class="loc-card reveal">
+      <div class="map-area" onclick="openMaps()">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.45;" viewBox="0 0 400 175" preserveAspectRatio="xMidYMid slice">
+          <line x1="0" y1="87" x2="400" y2="87" stroke="white" stroke-width="3" opacity="0.55"/>
+          <line x1="200" y1="0" x2="200" y2="175" stroke="white" stroke-width="2" opacity="0.38"/>
+          <line x1="0" y1="38" x2="400" y2="38" stroke="white" stroke-width="1.4" opacity="0.28"/>
+          <line x1="0" y1="136" x2="400" y2="136" stroke="white" stroke-width="1.4" opacity="0.28"/>
+          <line x1="100" y1="0" x2="100" y2="175" stroke="white" stroke-width="1.4" opacity="0.28"/>
+          <line x1="300" y1="0" x2="300" y2="175" stroke="white" stroke-width="1.4" opacity="0.28"/>
+          <rect x="8" y="48" width="74" height="30" fill="rgba(255,255,255,0.14)" rx="3"/>
+          <rect x="108" y="48" width="74" height="30" fill="rgba(255,255,255,0.11)" rx="3"/>
+          <rect x="208" y="48" width="74" height="30" fill="rgba(255,255,255,0.14)" rx="3"/>
+          <rect x="308" y="48" width="74" height="30" fill="rgba(255,255,255,0.11)" rx="3"/>
+          <rect x="8" y="96" width="74" height="30" fill="rgba(255,255,255,0.11)" rx="3"/>
+          <rect x="108" y="96" width="74" height="30" fill="rgba(255,255,255,0.14)" rx="3"/>
+          <rect x="208" y="96" width="74" height="30" fill="rgba(255,255,255,0.11)" rx="3"/>
+          <rect x="308" y="96" width="74" height="30" fill="rgba(255,255,255,0.14)" rx="3"/>
+        </svg>
+        <div class="map-pin">
+          <div class="pin-head"><span>📍</span></div>
+          <div class="pin-shadow"></div>
+        </div>
+        <button class="map-btn" onclick="openMaps()">🗺 Buka Maps</button>
+      </div>
+      <div class="loc-info">
+        <p class="loc-name">Rumah Kel. Bpk. Ari</p>
+        <p class="loc-addr">Rt. 02 Rw. 0l, Sukawarah, Kalijaran,<br>Karanganyar, Purbalingga, Jawa Tengah</p>
+        <button class="loc-dir-btn" onclick="openMaps()">🧭 Petunjuk Arah</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOA -->
+  <div class="doa-sec" id="page-doa">
+    <svg style="position:absolute;top:-8px;left:-8px;width:110px;opacity:0.25;pointer-events:none;" viewBox="0 0 120 120" fill="none">
+      <path d="M5,5 Q40,0 50,30 Q60,60 35,65 Q10,70 8,45 Q6,20 28,15" stroke="#5a9e50" stroke-width="2" fill="rgba(90,158,80,0.1)"/>
+      <circle cx="50" cy="30" r="17" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="1"/>
+      <circle cx="50" cy="30" r="8" fill="rgba(201,168,76,0.3)"/>
+    </svg>
+    <svg style="position:absolute;bottom:-8px;right:-8px;width:100px;opacity:0.25;pointer-events:none;transform:rotate(180deg);" viewBox="0 0 120 120" fill="none">
+      <path d="M5,5 Q40,0 50,30 Q60,60 35,65 Q10,70 8,45 Q6,20 28,15" stroke="#5a9e50" stroke-width="2" fill="rgba(90,158,80,0.1)"/>
+      <circle cx="50" cy="30" r="17" fill="rgba(250,246,238,0.9)" stroke="#c9a84c" stroke-width="1"/>
+      <circle cx="50" cy="30" r="8" fill="rgba(201,168,76,0.3)"/>
+    </svg>
+
+    <div class="sec-head reveal">
+      <span class="sec-tag" style="color:var(--green-dark);">✦ Doa &amp; Harapan ✦</span>
+      <h2 class="sec-title">Kiriman Doa</h2>
+    </div>
+
+    <div style="max-width:420px;margin:0 auto;">
+      <p class="doa-arabic reveal">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+      <div class="gd reveal" style="margin:18px 0;"><span class="gd-icon">✦</span></div>
+      <p class="doa-latin reveal">
+        "Ya Allah, muliakanlah ia, kuatkanlah imannya,<br>
+        perkokoh hatinya, lapangkanlah rezeki-Nya<br>
+        dan arahkanlah selalu pada kebaikan"
+      </p>
+      <div class="gd reveal" style="margin:18px 0;"><span class="gd-icon">✦</span></div>
+      <p class="doa-trans reveal">
+        Semoga Allah SWT senantiasa memberikan perlindungan, keberkahan, 
+        dan kesehatan kepada Raditya P. Pratama.<br>
+        <strong style="color:var(--green-dark);">Aamiin Ya Rabbal Aalamiin.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- RSVP -->
+  <div class="rsvp-sec reveal" id="page-konfirmasi">
+    <svg style="position:absolute;top:0;left:0;width:180px;opacity:0.08;pointer-events:none;" viewBox="0 0 180 180" fill="none"><circle cx="90" cy="90" r="70" fill="rgba(201,168,76,0.8)"/></svg>
+    <svg style="position:absolute;bottom:0;right:0;width:160px;opacity:0.06;pointer-events:none;" viewBox="0 0 160 160" fill="none"><circle cx="80" cy="80" r="62" fill="white"/></svg>
+
+    <div style="position:relative;z-index:1;">
+      <span style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,168,76,0.72);font-weight:700;display:block;margin-bottom:7px;">✦ Konfirmasi Kehadiran ✦</span>
+      <h2 class="rsvp-title">Konfirmasi</h2>
+      <p class="rsvp-sub">
+        Atas kehadiran dan doa Bapak/Ibu/Saudara/i<br>
+        kami ucapkan <strong>Wassalamualaikum Warahmatullahi Wabarakatuh</strong>
+      </p>
+      <p class="rsvp-family">
+        Hormat Kami,
+        <strong>Kel. Bpk. Ari & Ibu Muslikhah</strong>
+      </p>
+      <div class="btn-grp">
+        <a href="https://wa.me/6287742909134?text=Bismillah...%20Assalamualaikum%2C%20Saya%20akan%20hadir%20di%20acara%20Khitanan%20Raditya%20P.%20Pratama%20pada%2025-29%20Maret%202026.%20Semoga%20acaranya%20lancar%20dan%20penuh%20berkah.%20Aamiin." target="_blank" class="btn-p">
+          <span>✅</span> Konfirmasi Kehadiran
+        </a>
+        <button class="btn-s" onclick="shareInvitation()">
+          <span>🔗</span> Bagikan Undangan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing-sec reveal">
+    <svg style="position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:clamp(180px,55vw,340px);opacity:0.22;pointer-events:none;" viewBox="0 0 340 55" fill="none">
+      <path d="M0,27 Q85,0 170,27 Q255,55 340,27" stroke="#c9a84c" stroke-width="1.4" fill="none"/>
+      <path d="M0,27 Q85,14 170,27 Q255,40 340,27" stroke="#c9a84c" stroke-width="0.7" fill="none" opacity="0.5"/>
+    </svg>
+
+    <div class="gd reveal" style="margin-bottom:24px;"><span class="gd-icon" style="font-size:1.2rem;">❀</span></div>
+    <p class="cl-family">Hormat Kami,</p>
+    <p class="cl-name">Keluarga Bpk. Ari & Ibu Muslikhah</p>
+    <div class="gd reveal" style="margin:12px 0;"><span class="gd-icon">✦</span></div>
+    <p class="cl-quote">"Barakallaahu laka"</p>
+    <p class="cl-trans">Semoga Allah memberkatimu</p>
+    <p class="cl-credit"> &nbsp;·&nbsp; Raditya P. Pratama &nbsp;·&nbsp; 2026</p>
+  </div>
+
+</div><!-- /#main-invitation -->
+
+<!-- ==================== BOTTOM NAVBAR ==================== -->
+<nav class="bottom-nav" id="bottom-nav">
+  <a class="nav-item active" href="javascript:void(0)" onclick="navTo('home',this)" data-target="page-home">
+    <div class="nav-dot"></div>
+    <span class="nav-ico">🏠</span>
+    <span class="nav-lbl">Beranda</span>
+  </a>
+  <a class="nav-item" href="javascript:void(0)" onclick="navTo('lokasi',this)" data-target="page-lokasi">
+    <span class="nav-ico">📍</span>
+    <span class="nav-lbl">Lokasi</span>
+  </a>
+  <a class="nav-item" href="javascript:void(0)" onclick="navTo('doa',this)" data-target="page-doa">
+    <span class="nav-ico">🤲</span>
+    <span class="nav-lbl">Doa</span>
+  </a>
+  <a class="nav-item" href="javascript:void(0)" onclick="navTo('konfirmasi',this)" data-target="page-konfirmasi">
+    <span class="nav-ico">✉️</span>
+    <span class="nav-lbl">Konfirmasi</span>
+  </a>
+</nav>
+
+<script>
+/* ====== ENVELOPE OPEN ====== */
+function openEnvelope() {
+  const envScreen = document.getElementById('envelope-screen');
+  const overlay   = document.getElementById('opening-overlay');
+  const main      = document.getElementById('main-invitation');
+  const nav       = document.getElementById('bottom-nav');
+  const pts       = document.getElementById('particles');
+
+  overlay.classList.add('active');
+  envScreen.classList.add('hide');
+  createParticles();
+  pts.classList.add('visible');
+
+  setTimeout(() => {
+    overlay.classList.remove('active');
+    main.classList.add('visible');
+    nav.classList.add('visible');
+    initReveal();
+    startCountdown();
+  }, 1900);
+}
+
+/* ====== PARTICLES ====== */
+function createParticles() {
+  const c = document.getElementById('particles');
+  const colors = ['#c9a84c','#e8cc80','#5a9e50','#f5f0e8','#a87c2a','#7a1e2e','#faf6ee'];
+  const shapes = ['✦','✿','❀','◆','●','◉','✤'];
+  for (let i = 0; i < 35; i++) {
+    const el = document.createElement('div');
+    el.className = 'pt';
+    el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      color:${colors[Math.floor(Math.random()*colors.length)]};
+      font-size:${5+Math.random()*13}px;
+      animation-duration:${3+Math.random()*5}s;
+      animation-delay:${Math.random()*2.5}s;
+      background:transparent; width:auto; height:auto; border-radius:0;
+    `;
+    c.appendChild(el);
+  }
+}
+
+/* ====== COUNTDOWN ====== */
+function startCountdown() {
+  const target = new Date('2026-03-25T07:30:00+07:00').getTime();
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      ['d','h','m','s'].forEach(k => document.getElementById('cd-'+k).textContent = '00');
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff % 86400000 / 3600000);
+    const m = Math.floor(diff % 3600000 / 60000);
+    const s = Math.floor(diff % 60000 / 1000);
+    document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+/* ====== SCROLL REVEAL ====== */
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  const ob = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 75);
+        ob.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => ob.observe(el));
+}
+
+/* ====== NAVBAR ====== */
+function navTo(id, el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  const t = document.getElementById('page-' + id);
+  if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Update nav on scroll
+document.getElementById('main-invitation').addEventListener('scroll', function() {
+  const sections = ['page-home','page-detail','page-lokasi','page-doa','page-konfirmasi','closing-sec'];
+  const scroll = this.scrollTop + 120;
+  let current = 'page-home';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scroll) current = id;
+  });
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    if (n.dataset.target === current) n.classList.add('active');
+  });
+});
+
+/* ====== MAPS ====== */
+function openMaps() {
+    window.open('https://www.google.com/maps?q=-7.3112128,109.4163601', '_blank');
+}
+
+/* ====== SHARE ====== */
+function shareInvitation() {
+  const text = `✨ Undangan Khitanan ✨\n\nBismillahirrahmanirrahim\n\n🎉 *Khitanan*\n👦 *Raditya P. Pratama*\nPutra dari Bpk. Ari & Ibu Muslikhah\n\n📅 Sabtu - Minggu, 25 - 29 Maret 2026\n🕐 07.30 WIB s/d Selesai\n📍 Rt. 02 Rw. Rl, Sukawarah, Kalijaran, Karanganyar, Purbalingga\n\nWassalamualaikum Warahmatullahi Wabarakatuh 🙏`;
+  if (navigator.share) {
+    navigator.share({ title: 'Undangan Khitanan Raditya', text })
+      .catch(() => copy(text));
+  } else { copy(text); }
+}
+function copy(text) {
+  navigator.clipboard.writeText(text).then(() => toast('✅ Teks undangan berhasil disalin!')).catch(() => toast('📋 Gunakan tombol Share browser'));
+}
+function toast(msg) {
+  const el = document.createElement('div');
+  el.textContent = msg;
+  el.style.cssText = 'position:fixed;bottom:98px;left:50%;transform:translateX(-50%);background:rgba(45,90,39,0.96);color:white;padding:11px 22px;border-radius:28px;font-family:Nunito,sans-serif;font-size:0.83rem;font-weight:700;z-index:999;box-shadow:0 4px 20px rgba(0,0,0,0.22);white-space:nowrap;';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// Keyboard shortcut
+document.addEventListener('keydown', e => {
+  if ((e.key === ' ' || e.key === 'Enter') && !document.getElementById('main-invitation').classList.contains('visible')) {
+    openEnvelope();
+  }
+});
+</script>
+</body>
+</html>
