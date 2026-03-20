@@ -1190,11 +1190,13 @@ function openMaps() {
 
 /* ====== SHARE ====== */
 function shareInvitation() {
-  const text = `https://undangan-khitan-raditya.vercel.app/ \n✨ Undangan Khitanan ✨\n\nBismillahirrahmanirrahim\n\n🎉 *Khitanan*\n👦 *Raditya P. Pratama*\nPutra dari Bpk. Ari & Ibu Muslikhah\n\n📅 Sabtu - Minggu, 25 - 29 Maret 2026\n🕐 07.30 WIB s/d Selesai\n📍 Rt. 02 Rw. Rl, Sukawarah, Kalijaran, Karanganyar, Purbalingga\n\n Wassalamualaikum Warahmatullahi Wabarakatuh 🙏`;
+  const url  = 'https://undangan-khitan-raditya.vercel.app/';
+  const text = `✨ Undangan Khitanan ✨\n\nBismillahirrahmanirrahim\n\n🎉 *Khitanan*\n👦 *Raditya P. Pratama*\nPutra dari Bpk. Ari & Ibu Muslikhah\n\n📅 Sabtu - Minggu, 25 - 29 Maret 2026\n🕐 07.30 WIB s/d Selesai\n📍 Sukawarah, Kalijaran, Karanganyar, Purbalingga\n\n🔗 Buka undangan di:\n${url}\n\nWassalamualaikum Warahmatullahi Wabarakatuh 🙏`;
+
   if (navigator.share) {
-    navigator.share({ title: 'Undangan Khitanan Raditya', text })
-      .catch(() => copy(text));
-  } else { copy(text); }
+    navigator.share({ title: 'Undangan Khitanan Raditya', text, url })
+      .catch(() => copy(url));
+  } else { copy(url); }
 }
 function copy(text) {
   navigator.clipboard.writeText(text).then(() => toast('✅ Teks undangan berhasil disalin!')).catch(() => toast('📋 Gunakan tombol Share browser'));
